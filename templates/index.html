@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static './css/app.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">QueryBOT</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{% static './images/chat.svg' %}" style="margin: 5% 0px;width: 100%;">
+            </div>
+            <div class="upload-container col-md-6">
+                <form id="upload-form" enctype="multipart/form-data" method="POST" action="upload">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Upload File</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="video">
+                    </div>
+                    <br>
+                    <button id="upload-button"><img src="{% static './images/upload.svg' %}"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <h1>Videos</h1>
+    <div class="container">
+        <div class="row">
+            {% for video in videos %}
+                <div class="col-md-4">
+                    <video width="100%" controls>
+                        <source src='/media/{{ video.video_data }}' type="video/mp4">
+                    </video>
+                    <br>
+                    <button><a href="chat/{{ video.id }}">Chat</a></button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+</html>

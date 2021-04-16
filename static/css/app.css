@@ -1,0 +1,10 @@
+.upload-container {
+  text-align: center;
+  margin: 5% 0px;
+}
+
+#upload-button {
+  border: 1px solid black;
+  border-radius: 20px;
+  width: 50%;
+}
