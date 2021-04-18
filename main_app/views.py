@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from .speech_to_text import convert_to_text
 from .albert import bye
 from django.conf import settings
+from django.http import JsonResponse
+
 
 # Create your views here.
 def index(request):
@@ -67,11 +69,12 @@ def chatInterface(request,id):
             paragraph = file_content
             answer = bye(question,paragraph)
     context = {
-        'video': video,
-        'text': text,
+        # 'video': video,
+        # 'text': text,
         'file_content' : file_content,
-        'answer': answer
+        'answer': answer,
     }
     print('Process Finished')
+    return JsonResponse(context)
     return render(request,'chat.html', context)
 
