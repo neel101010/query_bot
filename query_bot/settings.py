@@ -66,6 +66,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
+        'libraries':{
+            'custom_tags':  'templates.custom_tags',
+        }
         },
     },
 ]
@@ -97,11 +101,12 @@ DATABASES = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ml',
-        'USER' : 'postgres',
-        'PASSWORD' : '12345',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'query_bot',
+        'HOST': '127.0.0.1',
+        'PORT':'3307',
+        'USER' : 'root',
+        'PASSWORD' : '',
     }
 }
 

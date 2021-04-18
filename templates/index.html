@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load custom_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,15 +49,15 @@
             </div>    
         </div>
     </div>
-    
+    {% for course in courses %}
     <div class="course-section">
-        <h3>Machine Learning — Coursera</h3>
+        <h3>{{course.course_name}}</h3>
         <div class="row">
             <div class="col-10">
                 <h5>Videos content</h5>
                 <div class="row our-videos-section-row">
                     <div class="col-md-4">
-                        <form id="upload-form" enctype="multipart/form-data" method="POST" action="upload">
+                        <form id="upload-form" enctype="multipart/form-data" method="POST" action="upload/{{course.id}}">
                             {% csrf_token %}
                             <div class="form-group our-upload-form">
                                 <label class="upload-container" for="exampleFormControlFile1">
@@ -71,6 +72,7 @@
                         </form>
                     </div>
                     {% for video in videos %}
+                        {% if video.course_id == course.id %}
                         <div class="col-md-4">
                             <video width="100%" height="100%"  controls>
                                 <source src='/media/{{ video.video_data }}' type="video/mp4">
@@ -78,24 +80,13 @@
                             <br>
                             <!-- <button><a href="chat/{{ video.id }}">Chat</a></button> -->
                         </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <div class="transcript">
                     <h3>Transcript</h3>
-                    <p>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-                        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 
-                        a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, 
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
-                        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. 
-                        Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, 
-                        and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus 
-                        Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. 
-                        The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                    The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de 
-                    Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation 
-                    by H. Rackham. <span data-toggle="modal" data-target=".bd-example-modal-lg">...Read More</span>
+                    <p>{{ file_content|get_item:course.id }}
+ <!-- <span data-toggle="modal" data-target=".bd-example-modal-lg">...Read More</span> -->
                     </p>
                 </div>
             </div>
@@ -115,7 +106,7 @@
             </div>
         </div> 
     </div>
-
+    {% endfor %}
     <div class="question-ans-section">
         <h1 class="q-a-text">Q&A Forum</h1>
         <h5 class="question-in-course-text">Questions in this course</h5>
@@ -156,6 +147,7 @@
             </p>    
         </div>
     </div>
+
     
 
     <!-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -176,7 +168,7 @@
 
     
  <!-- Modal -->
- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+ <!-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -202,7 +194,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 

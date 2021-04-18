@@ -59,7 +59,7 @@ def list_blobs(bucket_name):
         #     blob.delete()
 
 
-def convert_to_text(filename):
+def convert_to_text(course, filename):
     filename = filename.split('/')[-1]
     newfilename = convert_audio(filename)
     client = speech.SpeechClient()
@@ -73,14 +73,15 @@ def convert_to_text(filename):
     response = client.long_running_recognize(config=config, audio={ "uri" : "gs://querybot_bucket_2/" + newfilename})
     result = response.result()
     print("Response Received of speech to text")
-    filename = filename.split('.')[0] + '.txt'
-    f = open(BASE_DIR + "/media/text/" + filename,"w+")
-    f.close()
+    # filename = filename.split('.')[0] + '.txt'
+    # f = open(BASE_DIR + "/media/text/" + filename,"w+")
+    # f.close()
     for result in result.results:
-        with open(BASE_DIR + "/media/text/" + filename, 'a') as f:
+        with open(BASE_DIR + "/media/text/" + course, 'a') as f:
             f.write(result.alternatives[0].transcript)
     print('Text file Generated')
-    return BASE_DIR+"/media/text/" + filename
+    # return BASE_DIR+"/media/text/" + filename
+    return BASE_DIR+"/media/text/" + course
 
 
 list_blobs(bucket_name)

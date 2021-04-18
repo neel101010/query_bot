@@ -141,6 +141,7 @@ def run_prediction(question_texts, context_text):
 
 
 def bye(question,context):
+    return "ff"
     context = context
     questions = [question]
 
