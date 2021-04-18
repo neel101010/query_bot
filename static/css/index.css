@@ -1,0 +1,167 @@
+.navbar {
+    padding : 8px 7%;
+}
+
+.nav-item {
+    margin-left : 15px;
+}
+
+.nav-item a{
+    font-size : 16px;
+    font-weight : 500;
+    color : blue !important;
+}
+
+.navbar-brand img{
+    width : 50px;
+    height : 50px;
+}
+
+.navbar-brand span{
+    font-weight : 500;
+    color : blue;
+    margin-top : 5px;
+}
+
+.course-section{
+    margin : 10px 7%;
+}
+
+.course-section .transcript {
+    margin : 20px 0px;
+}
+
+.course-section .transcript h3{
+    color: #858585;
+    font-size: 28px;
+    text-decoration: underline;
+}
+
+.course-section .transcript p{
+    font-size : 16px;
+}
+
+.course-section .transcript p span{
+    color : blue;
+}
+
+.our-videos-section-row{
+    margin-top : 18px;
+}
+
+
+.upload-container{
+    width : 100%;
+    margin-bottom : 0px;
+    margin-top : 0px;
+}
+
+.upload-container .upload-container-content-div{
+    width: 100%;
+    border: 1px solid #cdcdcdbf;
+    padding: 60px;
+    text-align: center;
+    border-radius: 4px;
+    background: #f0f0f069;
+}
+
+.upload-container .upload-container-content-div i{
+    font-size: 51px;
+    color: #5b5bff;
+}
+
+
+.upload-container .upload-container-content-div p{
+    margin: 0;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 4px;
+}
+
+.our-upload-form{
+    margin-bottom : 2px;
+}
+
+#upload-form input{
+    visibility: hidden;
+    position: absolute;
+    top: -1500px;
+    left: -1500px;
+}
+
+#upload-button {
+    padding: 4px;
+    border-radius: 5px;
+}
+
+#upload-button i {
+    color : white;
+    font-size : 16px;
+    margin-right : 2px;
+}
+
+#upload-button span{
+    font-weight : 500;
+    font-size : 14px;
+}
+
+.each-related-course{
+    margin-bottom : 4px;
+}
+
+.our-videos-section-row .col-md-4{
+    padding : 22px !important;
+}
+
+.our-main-heading-div{
+    margin : 10px 7%;
+    padding : 70px 0px; 
+}
+
+.main-heading-content h1{
+    color: #5757ffeb;
+    font-size: 48px;
+    font-weight: 500;
+    margin-top: 40px;
+    margin-bottom: 11px;
+}
+
+.main-heading-content p{
+    font-weight : 400;
+    color : gray;
+
+}
+
+.main-title-images{
+    text-align: center;
+} 
+
+.main-title-images img{
+    width : 400px;
+}
+
+.question-ans-section{
+    margin : 10px 7%;
+}
+
+.question-ans-section .q-a-text{
+    color: #858585;
+    font-size: 28px;
+    text-decoration: underline;
+}
+
+.question-ans-section .question-in-course-text{
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #484848;
+}
+
+.question-ans-section  .each-question-and-answer-div h5{
+    color: #6666fff7;
+    font-size: 19px;
+}
+
+.question-ans-section  .each-question-and-answer-div p{
+    margin-left: 32px;
+}
