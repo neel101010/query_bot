@@ -10,6 +10,14 @@
     <link rel="stylesheet" type="text/css" href="{% static './css/app.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static './css/index.css' %}">
     <script src="https://kit.fontawesome.com/bd6753c894.js" crossorigin="anonymous"></script>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{%  static './css/main.css' %}" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <link href="{% static './css/select2.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static './css/chatBot.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static './css/timeline.css' %}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -19,11 +27,11 @@
                 <span>QueryBOT</span>
             </div>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
       
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="/home/login"><i class="fas fa-sign-in-alt"></i> Login</a>
@@ -32,7 +40,7 @@
               <a class="nav-link" href="/home/sign"><i class="fas fa-user-plus"></i> SignUp</a>
             </li>
           </ul>
-        </div>
+        </div> -->
     </nav>
 
     <div class="row our-main-heading-div">
@@ -49,9 +57,10 @@
             </div>    
         </div>
     </div>
+
     {% for course in courses %}
-    <div class="course-section">
-        <h3>{{course.course_name}}</h3>
+    <div data="{{ course.id }}" class="course-section">
+        <h3 class="course-name">{{course.course_name}}</h3>
         <div class="row">
             <div class="col-10">
                 <h5>Videos content</h5>
@@ -60,13 +69,13 @@
                         <form id="upload-form" enctype="multipart/form-data" method="POST" action="upload/{{course.id}}">
                             {% csrf_token %}
                             <div class="form-group our-upload-form">
-                                <label class="upload-container" for="exampleFormControlFile1">
+                                <label class="upload-container" for="exampleFormControlFile{{ course.id }}">
                                   <div class="upload-container-content-div">
                                     <i class="fas fa-upload"></i>
                                     <p>Select File</p>
                                   </div>  
                                 </label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="video">
+                                <input type="file" class="form-control-file" id="exampleFormControlFile{{ course.id }}" name="video">
                             </div>
                             <button class="btn btn-primary btn-sm btn-block" id="upload-button"><i class="fas fa-cloud-upload-alt"></i> <span> Upload </span></button>
                         </form>
@@ -107,6 +116,9 @@
         </div> 
     </div>
     {% endfor %}
+
+
+
     <div class="question-ans-section">
         <h1 class="q-a-text">Q&A Forum</h1>
         <h5 class="question-in-course-text">Questions in this course</h5>
@@ -148,6 +160,62 @@
         </div>
     </div>
 
+     
+
+    <div class="chat-screen">
+        <div class="chat-header">
+            <div class="chat-header-title">
+                Query Bot
+            </div>
+        </div>
+        <div class="chat-mail">
+            <div class="row">
+                <div class="col-md-12 text-center mb-2">
+                    <p>Hi 👋! Please fill out the form below to start chatting with the next available agent.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Name">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-primary btn-rounded btn-block">Start Chat</button>
+                </div>
+            </div>
+        </div>
+        <div class="chat-body hide">
+            <!-- <div class="chat-start">Monday, 1:27 PM</div> -->
+            <div class="chat-bubble you">Welcome to Query bot</div>
+            <div class="chat-bubble you">Hii Ajay</div>
+            <div class="chat-bubble me">Hi, I am back</div>
+            <div class="chat-bubble you">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto;display: block;shape-rendering: auto;width: 43px;height: 20px;" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <circle cx="0" cy="44.1678" r="15" fill="#ffffff">
+                        <animate attributeName="cy" calcMode="spline" keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite" values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s" begin="-0.6s"></animate>
+                    </circle> <circle cx="45" cy="43.0965" r="15" fill="#ffffff">
+                    <animate attributeName="cy" calcMode="spline" keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite" values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s" begin="-0.39999999999999997s"></animate>
+                </circle> <circle cx="90" cy="52.0442" r="15" fill="#ffffff">
+                    <animate attributeName="cy" calcMode="spline" keySplines="0 0.5 0.5 1;0.5 0 1 0.5;0.5 0.5 0.5 0.5" repeatCount="indefinite" values="57.5;42.5;57.5;57.5" keyTimes="0;0.3;0.6;1" dur="1s" begin="-0.19999999999999998s"></animate>
+                </circle></svg>
+            </div>
+        </div>
+        <div class="chat-input hide">
+            <form class="question-and-answer-form" method="post">
+                {% csrf_token %} 
+                <input type="text" id="questin-text-input" placeholder="Type a message...">
+                <div class="input-action-icon">
+                        <button class="btn btn-sm btn-primary"><i class="fas fa-location-arrow"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="chat-bot-icon">
+        <img src="{% static './images/we-are-here.svg' %}"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square animate"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x "><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </div>
     
 
     <!-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -195,11 +263,21 @@
       </div>
     </div>
   </div> -->
+  <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="257be86a981729866f2fa61c-|49" defer=""></script>
+  <!-- Time line Html Ends -->
+  <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+  <script src="{% static './js/jquery-3.1.1.min.js' %}"></script>
+  <script src="{% static './js/popper.min.js' %}"></script>
+  <script src="{% static './js/bootstrap.min.js' %}"></script>
+  <script src="{% static './js/select2.min.js' %}"></script>
+  <script src="{% static './js/index.js'  %}"></script>
+  <script src="{% static './js/Chatbot.js'  %}"></script>
 
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </html>

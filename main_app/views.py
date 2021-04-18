@@ -42,12 +42,14 @@ def videoDisplay(request):
             f.close()
         except:
             continue
-    print(file_content)
+    
     context = {
         'courses': [Course.objects.all().first],
         'videos':videos,
         'file_content':file_content,
     }
+    print(context['courses'])
+    print(file_content)
     return render(request,'index.html',context)
 
 

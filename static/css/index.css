@@ -165,3 +165,7 @@
 .question-ans-section  .each-question-and-answer-div p{
     margin-left: 32px;
 }
+
+.question-and-answer-form button{
+    padding: 3px 7px;
+}
