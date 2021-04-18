@@ -59,7 +59,7 @@ def list_blobs(bucket_name):
         #     blob.delete()
 
 
-def convert_to_text(id,filename):
+def convert_to_text(filename):
     filename = filename.split('/')[-1]
     newfilename = convert_audio(filename)
     client = speech.SpeechClient()

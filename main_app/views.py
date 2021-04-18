@@ -16,7 +16,7 @@ def videoUpload(request):
         content = Video(video_data=video_data)
         content.save()
         print(content.id,content.video_data.name)
-        text_filepath = convert_to_text(content.id,content.video_data.name)
+        text_filepath = convert_to_text(content.video_data.name)
         text_content = Text(video=content, text_data=text_filepath)
         text_content.save()
     return redirect('/main')
