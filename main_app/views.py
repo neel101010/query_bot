@@ -19,7 +19,7 @@ def videoUpload(request):
         text_filepath = convert_to_text(content.video_data.name)
         text_content = Text(video=content, text_data=text_filepath)
         text_content.save()
-    return redirect('/main')
+    return redirect('/home')
 
 
 def videoDisplay(request):

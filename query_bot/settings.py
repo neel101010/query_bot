@@ -78,15 +78,32 @@ WSGI_APPLICATION = 'query_bot.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'query_bot',
-        'HOST': '127.0.0.1',
-        'PORT': '3307',
-        'USER': 'root',
-        'PASSWORD': '',
+        'ENGINE': 'django.db.backends.sqlite3',#we can change the last property from sqlite3->mysql
+        'NAME': BASE_DIR / 'db.sqlite3',#name of ur db(how do we know its name???)
     }
 }
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'query_bot',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3307',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#     }
+# }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ml',
+        'USER' : 'postgres',
+        'PASSWORD' : '12345',
+        'HOST': 'localhost'
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

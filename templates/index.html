@@ -5,51 +5,209 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static './css/app.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static './css/index.css' %}">
+    <script src="https://kit.fontawesome.com/bd6753c894.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">QueryBOT</a>
+        <a class="navbar-brand" href="/home">
+            <div class="d-flex justify-content-start align-items-center">
+                <img src="{% static './images/chatbot-icon.jpg' %}">
+                <span>QueryBOT</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/home/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/home/sign"><i class="fas fa-user-plus"></i> SignUp</a>
+            </li>
+          </ul>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="row our-main-heading-div">
+       <div class="col-6 main-heading-content">
+            <h1>Query Bot</h1>
+            <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+            </p>
+        </div>
+        <div class="col-6">
+            <div class="main-title-images">
+            <img src="{% static './images/chat.svg' %}">
+            </div>    
+        </div>
+    </div>
+    
+    <div class="course-section">
+        <h3>Machine Learning — Coursera</h3>
         <div class="row">
-            <div class="col-md-6">
-                <img src="{% static './images/chat.svg' %}" style="margin: 5% 0px;width: 100%;">
-            </div>
-            <div class="upload-container col-md-6">
-                <form id="upload-form" enctype="multipart/form-data" method="POST" action="upload">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Upload File</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="video">
+            <div class="col-10">
+                <h5>Videos content</h5>
+                <div class="row our-videos-section-row">
+                    <div class="col-md-4">
+                        <form id="upload-form" enctype="multipart/form-data" method="POST" action="upload">
+                            {% csrf_token %}
+                            <div class="form-group our-upload-form">
+                                <label class="upload-container" for="exampleFormControlFile1">
+                                  <div class="upload-container-content-div">
+                                    <i class="fas fa-upload"></i>
+                                    <p>Select File</p>
+                                  </div>  
+                                </label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="video">
+                            </div>
+                            <button class="btn btn-primary btn-sm btn-block" id="upload-button"><i class="fas fa-cloud-upload-alt"></i> <span> Upload </span></button>
+                        </form>
                     </div>
-                    <br>
-                    <button id="upload-button"><img src="{% static './images/upload.svg' %}"></button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <h1>Videos</h1>
-    <div class="container">
-        <div class="row">
-            {% for video in videos %}
-                <div class="col-md-4">
-                    <video width="100%" controls>
-                        <source src='/media/{{ video.video_data }}' type="video/mp4">
-                    </video>
-                    <br>
-                    <button><a href="chat/{{ video.id }}">Chat</a></button>
+                    {% for video in videos %}
+                        <div class="col-md-4">
+                            <video width="100%" height="100%"  controls>
+                                <source src='/media/{{ video.video_data }}' type="video/mp4">
+                            </video>
+                            <br>
+                            <!-- <button><a href="chat/{{ video.id }}">Chat</a></button> -->
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+                <div class="transcript">
+                    <h3>Transcript</h3>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+                        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 
+                        a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, 
+                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
+                        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. 
+                        Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, 
+                        and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus 
+                        Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. 
+                        The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                    The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de 
+                    Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation 
+                    by H. Rackham. <span data-toggle="modal" data-target=".bd-example-modal-lg">...Read More</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-2">
+                <h5>Related courses</h5>
+                <div class="list-of-courses flex-row">
+                    <div class="each-related-course">
+                        <a href="#">1. Machine Learning — Coursera</a>
+                    </div>
+                    <div class="each-related-course">
+                        <a href="#">2. Deep Learning Specialization — Coursera</a>
+                    </div>
+                    <div class="each-related-course">
+                        <a href="#">3. Machine Learning with Python — Coursera</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <div class="question-ans-section">
+        <h1 class="q-a-text">Q&A Forum</h1>
+        <h5 class="question-in-course-text">Questions in this course</h5>
+        <div class="each-question-and-answer-div">
+            <h5>Q1. What does the job hunting experience look like ?</h5>
+            <p>
+                Job hunting experience involves networking to get in touch with the right people in various companies, applying to lots of jobs through various channels, preparing for interviews – while interviews are uncertain it is 
+            </p>    
+        </div>
+        <div class="each-question-and-answer-div">
+            <h5>Q1. What does the job hunting experience look like ?</h5>
+            <p>
+                Job hunting experience involves networking to get in touch with the right people in various companies, applying to lots of jobs through various channels, preparing for interviews – while interviews are uncertain it is 
+            </p>    
+        </div>
+        <div class="each-question-and-answer-div">
+            <h5>Q1. What does the job hunting experience look like ?</h5>
+            <p>
+                Job hunting experience involves networking to get in touch with the right people in various companies, applying to lots of jobs through various channels, preparing for interviews – while interviews are uncertain it is 
+            </p>    
+        </div>
+        <div class="each-question-and-answer-div">
+            <h5>Q1. What does the job hunting experience look like ?</h5>
+            <p>
+                Job hunting experience involves networking to get in touch with the right people in various companies, applying to lots of jobs through various channels, preparing for interviews – while interviews are uncertain it is 
+            </p>    
+        </div>
+        <div class="each-question-and-answer-div">
+            <h5>Q1. What does the job hunting experience look like ?</h5>
+            <p>
+                Job hunting experience involves networking to get in touch with the right people in various companies, applying to lots of jobs through various channels, preparing for interviews – while interviews are uncertain it is 
+            </p>    
+        </div>
+        <div class="each-question-and-answer-div">
+            <h5>Q1. What does the job hunting experience look like ?</h5>
+            <p>
+                Job hunting experience involves networking to get in touch with the right people in various companies, applying to lots of jobs through various channels, preparing for interviews – while interviews are uncertain it is 
+            </p>    
         </div>
     </div>
+    
+
+    <!-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+            standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 
+            a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, 
+            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
+            Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. 
+            Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, 
+            and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+           The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+          </div>
+        </div>
+      </div> -->
+
+    
+ <!-- Modal -->
+ <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Transcript of Machine Learning — Coursera</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+            standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 
+            a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, 
+            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
+            Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. 
+            Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, 
+            and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus 
+            Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. 
+            The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+           The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de 
+           Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation 
+           by H. Rackham.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>
