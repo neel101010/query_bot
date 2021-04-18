@@ -28,3 +28,8 @@ class Text(models.Model):
 
     def __str__(self):
         return str(self.text_data)
+
+class Qna(models.Model):
+    question = models.CharField(max_length=250)
+    answer = models.CharField(max_length=250)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
