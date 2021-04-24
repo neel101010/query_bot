@@ -108,7 +108,6 @@ def run_prediction(question_texts, context_text):
             for i, example_index in enumerate(example_indices):
                 eval_feature = features[example_index.item()]
                 unique_id = int(eval_feature.unique_id)
-                output = 'start_logits'
                 output = [to_list(outputs[i%2][i]) for output in outputs]
 
                 start_logits, end_logits = output
@@ -141,7 +140,6 @@ def run_prediction(question_texts, context_text):
 
 
 def bye(question,context):
-    return "ff"
     context = context
     questions = [question]
 
