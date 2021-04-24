@@ -13,7 +13,6 @@ from transformers import (
 from transformers.data.processors.squad import SquadResult, SquadV2Processor, SquadExample
 from transformers.data.metrics.squad_metrics import compute_predictions_logits
 
-
 #Set this flag to use own model, or use pretrained model in the Hugging Face repository
 #Set this flag to use own model, or use pretrained model in the Hugging Face repository
 use_own_model = False
@@ -47,6 +46,7 @@ model.to(device)
 processor = SquadV2Processor()
 
 print("Done")
+
 
 def to_list(tensor):
     # print("==>" , tensor.detach().cpu().tolist())
@@ -141,16 +141,15 @@ def run_prediction(question_texts, context_text):
 
 
 def bye(question,context):
-    return "ff"
+    
     context = context
     questions = [question]
-
     # Run method
     predictions = run_prediction(questions, context)
-
     # Print results
     result = ""
     for key in predictions.keys():
         result = predictions[key]
         break
+    print(result)
     return result

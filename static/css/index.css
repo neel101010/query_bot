@@ -141,7 +141,8 @@
 }
 
 .question-ans-section{
-    margin : 10px 7%;
+    padding-bottom : 50px;
+    margin : 0px;
 }
 
 .question-ans-section .q-a-text{
