@@ -26,8 +26,8 @@ def convert_audio(filename):
     ext = filename.split('.')[1]
     newfilenamewav = filenamesplit + ".wav"
     newfilename = "mono_" + newfilenamewav
-    print(f"Final name : {newfilename}")
-    print(ext)
+    print("Final name :",newfilename)
+    print(f"Extension:",ext)
     ## conversion of file from mp to .wav file so that google speech api can process it and uploading to drive.
     if ext == 'mp3':
         sound = AudioSegment.from_mp3(BASE_DIR + '/media/videos/' + filename)
@@ -37,13 +37,13 @@ def convert_audio(filename):
     sound.export(BASE_DIR + '/media/wav_files/' + newfilename , format="wav") 
     print("Wav File Generated")
     storage_client = storage.Client.from_service_account_json(os.environ['GOOGLE_APPLICATION_CREDENTIALS'])
-    print("Wav File Generated 1")
+    print("Step 1")
     bucket = storage_client.get_bucket(bucket_name)
-    print("Wav File Generated 2")
+    print("Step 2")
     blob = bucket.blob(newfilename)
-    print("Wav File Generated 3")
+    print("Step 3")
     blob.upload_from_filename(BASE_DIR + '/media/wav_files/'+newfilename)
-    print("Wav File Generated 4")
+    print("Step 4")
     print("Uploaded To GCP")
     return  newfilename
 
@@ -55,8 +55,6 @@ def list_blobs(bucket_name):
     blobs = storage_client.list_blobs(bucket_name)
     for blob in blobs:
         print(blob.name )
-        # if(blob.name == 'mono_SDS.wav'):
-        #     blob.delete()
 
 
 def convert_to_text(course, filename):
@@ -80,17 +78,17 @@ def convert_to_text(course, filename):
     filename = filename.split('.')[0] + '.txt'
     f = open(BASE_DIR + "/media/text/" + course + "/" + filename,"w+")
     f.close()
-    f = open(BASE_DIR + "/media/text/" + course + "/" + course + ".txt","w+")
+    f = open(BASE_DIR + "/media/text/" + course + "/" + "main.txt" ,"w+")
     f.close()
     for result in result.results:
-        with open(BASE_DIR + "/media/text/" + course + "/" + course + ".txt", 'a') as f1:
+        with open(BASE_DIR + "/media/text/" + course + "/" + "main.txt", 'a') as f1:
             f1.write(result.alternatives[0].transcript)
-        with open(BASE_DIR + "/media/text/" + course + "/" + filename, 'w') as f2:
+        with open(BASE_DIR + "/media/text/" + course + "/" + filename, 'a') as f2:
             f2.write(result.alternatives[0].transcript)
+    f1.close()
+    f2.close()
     print('Text file Generated')
-    print(course)
-    # return BASE_DIR+"/media/text/" + filename
-    return BASE_DIR+"/media/text/" + course + "/" + course + ".txt", BASE_DIR+"/media/text/"  + course + "/" + filename
+    return BASE_DIR+"/media/text/" + course + "/" + "main.txt", BASE_DIR+"/media/text/"  + course + "/" + filename
 
 
-list_blobs(bucket_name)
+# list_blobs(bucket_name)

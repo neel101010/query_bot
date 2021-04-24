@@ -1,0 +1,15 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
+
+<div class="col-md-4">
+    <video width="100%" height="100%" controls>
+        <source src='/media/{{ video.video_data }}' type="video/mp4">
+    </video>
+    <br>
+    <!-- <button><a href="chat/{{ video.id }}">Chat</a></button> -->
+</div>
+<h1>Transcript</h1>
+<p>{{ file_content }}</p>
+{% endblock %}

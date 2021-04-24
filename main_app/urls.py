@@ -10,4 +10,5 @@ urlpatterns = [
     path('signup/check',views.signup_fun),
     path('login/check',views.login_fun),
     path('logout',views.logout_fun),
+    path('video/<int:id>',views.videoDetails),
 ]

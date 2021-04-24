@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'query_bot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',#we can change the last property from sqlite3->mysql
-        'NAME': BASE_DIR / 'db.sqlite3',#name of ur db(how do we know its name???)
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',#we can change the last property from sqlite3->mysql
+#         'NAME': BASE_DIR / 'db.sqlite3',#name of ur db(how do we know its name???)
+#     }
+# }
 
 
 # DATABASES = {
@@ -109,6 +109,16 @@ DATABASES = {
         'PASSWORD' : '',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'querybot',
+#         'USER' : 'postgres',
+#         'PASSWORD' : '12345',
+#         'HOST': 'localhost'
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

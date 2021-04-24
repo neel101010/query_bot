@@ -1,3 +1,7 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
 <form method="POST" action="signup/check">
             {% csrf_token %}
             <div class="form-group">
@@ -23,3 +27,4 @@
         </form>
     </div>
 </div>
+{% endblock %}

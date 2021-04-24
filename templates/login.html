@@ -1,3 +1,7 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
 <div class="form-content">
     <form method="POST" action="login/check">
         {% csrf_token %}
@@ -15,3 +19,4 @@
         <a href="/home/signup">Does not have account? Sign up</a>
     </form>
 </div>
+{% endblock %}
