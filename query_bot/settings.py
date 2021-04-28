@@ -100,26 +100,27 @@ WSGI_APPLICATION = 'query_bot.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'query_bot',
+#         'HOST': '127.0.0.1',
+#         'PORT':'3307',
+#         'USER' : 'root',
+#         'PASSWORD' : '',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'query_bot',
-        'HOST': '127.0.0.1',
-        'PORT':'3307',
-        'USER' : 'root',
-        'PASSWORD' : '',
+        'USER' : 'postgres',
+        'PASSWORD' : '12345',
+        'HOST': 'localhost'
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'querybot',
-#         'USER' : 'postgres',
-#         'PASSWORD' : '12345',
-#         'HOST': 'localhost'
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -174,9 +175,9 @@ MEDIA_ROOT = BASE_DIR/'media'
 
 
 MESSAGE_TAGS = {
-        messages.DEBUG: 'alert-secondary',
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
 }

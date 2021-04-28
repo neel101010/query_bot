@@ -8,10 +8,10 @@ from botocore.exceptions import ClientError
 import uuid
 from pathlib import Path
 import os
+from decouple import config
 
-
-AWS_ACCESS_KEY_ID = 'AKIA4VRJ74MQUSOS4ETW'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 
 temp = Path(__file__).resolve().parent.parent
 temp = str(temp)

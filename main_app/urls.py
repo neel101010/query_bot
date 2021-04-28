@@ -4,6 +4,10 @@ from main_app import views
 urlpatterns = [
     path('',views.videoDisplay),
     path('upload/<int:id>',views.videoUpload),
+    path('chat/<int:id>/classifytext' , views.textclassifier),
+    path('chat/<int:id>/gpt2chatbot' , views.gpt2chatbot),
+    path('chat/<int:id>/similarmatch' , views.similarmatch),
+    path('chat/<int:id>/generateanswer' , views.generateanswer),
     path('chat/<int:id>',views.chatInterface),
     path('signup',views.signup_view),
     path('login',views.login_view),

@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User, auth
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-
+import time
 
 # Create your views here.
 # def index(request):
@@ -22,10 +22,8 @@ def videoUpload(request,id):
         content = Video(video_data=video_data,course=course)
         content.save()
         text_filepath, text_filepath_video = convert_text(course.course_name,content.video_data.name)
-        
         course_text_content = CourseText(course=course, text_data=text_filepath)
         course_text_content.save()
-
         text_content = Text(video=content, text_data=text_filepath_video)
         text_content.save()
     return redirect('/home')
@@ -98,6 +96,7 @@ def videoDetails(request,id):
     }
     return render(request,'video.html',context)
 
+
 def login_view(request):
     return render(request,'login.html')
 
@@ -153,6 +152,44 @@ def logout_fun(request):
 
 
 
-
 # 1. Machine Learning — Coursera
 
+@csrf_exempt
+def textclassifier(request, id):
+    time.sleep(2)
+    print(request.POST.get('question'))
+    return JsonResponse({ 'value' : 1 })
+
+
+@csrf_exempt
+def gpt2chatbot(request , id):
+    time.sleep(2)
+    print(request.POST.get('question'))
+    question = request.POST.get('question')
+    return JsonResponse({
+       'question' : question,
+       'answer' : "Hi Ajay, I am GPT3 chatbot." 
+    })
+
+
+@csrf_exempt
+def similarmatch(request , id):
+    time.sleep(2)
+    print(request.POST.get('question'))
+    question = request.POST.get('question')
+    return JsonResponse({
+       'question' : "What is Machine Learning?",
+       'answer' : "Something" 
+    })
+
+
+
+@csrf_exempt
+def generateanswer(request , id):
+    time.sleep(2)
+    print(request.POST.get('question'))
+    question = request.POST.get('question')
+    return JsonResponse({
+       'question' : "What is Machine Learning?",
+       'answer' : "Machine learning is the study of computer algorithms that improve automatically through experience and by the use of data. It is seen as a part of artificial intelligence." 
+    })

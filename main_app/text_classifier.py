@@ -15,6 +15,7 @@ for i in temp:
     else:
         BASE_DIR = BASE_DIR + i
 
+
 model = load_model(BASE_DIR + "/main_app/001", compile = True)
 # loading tokenizer
 with open( BASE_DIR + '/main_app/tokenizer.pickle', 'rb') as handle:
