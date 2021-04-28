@@ -7,7 +7,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.contrib.auth.models import User, auth
 from django.views.decorators.csrf import csrf_exempt
-
+import time
 
 # Create your views here.
 def index(request):
@@ -143,3 +143,43 @@ def videoDetails(request,id):
     return render(request,'video.html',context)
 
 # 1. Machine Learning — Coursera
+
+@csrf_exempt
+def textclassifier(request, id):
+    time.sleep(2)
+    print(request.POST.get('question'))
+    return JsonResponse({ 'value' : 1 })
+
+
+@csrf_exempt
+def gpt2chatbot(request , id):
+    time.sleep(2)
+    print(request.POST.get('question'))
+    question = request.POST.get('question')
+    return JsonResponse({
+       'question' : question,
+       'answer' : "Hi Ajay, I am GPT3 chatbot." 
+    })
+
+
+@csrf_exempt
+def similarmatch(request , id):
+    time.sleep(2)
+    print(request.POST.get('question'))
+    question = request.POST.get('question')
+    return JsonResponse({
+       'question' : "What is Machine Learning?",
+       'answer' : "Something" 
+    })
+
+
+
+@csrf_exempt
+def generateanswer(request , id):
+    time.sleep(2)
+    print(request.POST.get('question'))
+    question = request.POST.get('question')
+    return JsonResponse({
+       'question' : "What is Machine Learning?",
+       'answer' : "Machine learning is the study of computer algorithms that improve automatically through experience and by the use of data. It is seen as a part of artificial intelligence." 
+    })
