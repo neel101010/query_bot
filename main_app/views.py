@@ -29,6 +29,8 @@ def videoUpload(request,id):
     return redirect('/home')
 
 
+
+
 def videoDisplay(request):
     videos = Video.objects.all()
     AllQuestions = Qna.objects.all()
@@ -192,3 +194,10 @@ def generateanswer(request , id):
        'question' : "What is Machine Learning?",
        'answer' : "Machine learning is the study of computer algorithms that improve automatically through experience and by the use of data. It is seen as a part of artificial intelligence." 
     })
+
+
+
+
+
+def question_similarity_checker(question , id):
+    pass
