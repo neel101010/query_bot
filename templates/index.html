@@ -4,7 +4,14 @@
 {% block content %}
 
     <div class="row our-main-heading-div">
-       <div class="col-6 main-heading-content">
+    <div class="col-6 main-heading-content">
+        {% if user.get_username %}
+            <h2>Welcome {{user.get_username }}</h2>
+            {% if user.is_staff %}
+            <p>You are instructor</p>
+            {% endif %}
+        {% endif %}
+
             <h1>Query Bot</h1>
             <p>
                 A Chatbot that can answer user queries by using course materials. It uses powerful models like ALBERT and BERT for natural language processing tasks.

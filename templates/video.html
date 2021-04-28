@@ -12,4 +12,17 @@
 </div>
 <h1>Transcript</h1>
 <p>{{ file_content }}</p>
+</div>
+    <div class="question-ans-section">
+        <h1 class="q-a-text">Q&A Forum</h1>
+        <h5 class="question-in-course-text">Questions in this course</h5>
+        {% for qna in AllQuestions %}
+            <div class="each-question-and-answer-div">
+                <h5>{{ forloop.counter }}) {{ qna.question }}</h5>
+                <p>
+                    {{ qna.answer }}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

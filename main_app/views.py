@@ -1,18 +1,19 @@
 from django.shortcuts import render,redirect
 from .models import Video,Text,Course,CourseText,Qna
 from django.http import HttpResponse
-from .speech_to_text import convert_to_text
 from .albert import bye
+from .text_classifier import do_prediction
+from .speech_text import convert_text
 from django.conf import settings
 from django.http import JsonResponse
 from django.contrib.auth.models import User, auth
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 import time
 
 # Create your views here.
-def index(request):
-    return render(request,'index.html')
-
+# def index(request):
+#     return render(request,'index.html')
 
 def videoUpload(request,id):
     if request.method == 'POST':
@@ -20,11 +21,9 @@ def videoUpload(request,id):
         course = Course.objects.get(pk=id)
         content = Video(video_data=video_data,course=course)
         content.save()
-        text_filepath, text_filepath_video = convert_to_text(course.course_name,content.video_data.name)
-        
+        text_filepath, text_filepath_video = convert_text(course.course_name,content.video_data.name)
         course_text_content = CourseText(course=course, text_data=text_filepath)
         course_text_content.save()
-
         text_content = Text(video=content, text_data=text_filepath_video)
         text_content.save()
     return redirect('/home')
@@ -46,7 +45,7 @@ def videoDisplay(request):
             continue
     
     context = {
-        'courses': [Course.objects.all().first],
+        'courses': Course.objects.all(),
         'videos':videos,
         'file_content':file_content,
         'AllQuestions' : AllQuestions,
@@ -57,11 +56,9 @@ def videoDisplay(request):
 
 @csrf_exempt
 def chatInterface(request ,id):
-    # text = Text.objects.get(video=video)
     course = Course.objects.get(pk=id)
     course_text = CourseText.objects.get(course_id = course.id)
     qna = Qna.objects.all()
-    # video = Video.objects.get(pk=id)
     f = open(str(course_text.text_data), 'r')
     file_content = f.read()
     f.close()
@@ -71,16 +68,32 @@ def chatInterface(request ,id):
         if(len(question) != 0):
             question = request.POST.get('question')
             paragraph = file_content
-            answer = bye(question,paragraph)
+            if do_prediction(question):
+                answer = bye(question,paragraph)
+            else:
+                answer = "General Question" 
+
     context = {
-        # 'video': video,
-        # 'text': text,
         'file_content' : file_content,
         'answer': answer,
     }
     print('Process Finished')
     return JsonResponse(context)
-    # return render(request,'chat.html', context)
+
+
+def videoDetails(request,id):
+    video = Video.objects.get(pk=id)
+    text = Text.objects.get(video_id = video.id)
+    AllQuestions = Qna.get(video_id = video.id)
+    f = open(str(text.text_data), 'r')
+    file_content = f.read()
+    f.close()
+    context = {
+        'video' : video,
+        'file_content' : file_content,
+        'AllQuestions':  AllQuestions,
+    }
+    return render(request,'video.html',context)
 
 
 def login_view(request):
@@ -96,8 +109,10 @@ def login_fun(request):
     if user is not None:
         auth.login(request, user)
         print("User is logged in")
+        messages.success(request, "Succussfully logged in" )
         return redirect("/home")
     else:
+        messages.error(request, "Wrong credentials" )
         return redirect("/home/login")
 
 def signup_fun(request):
@@ -111,36 +126,30 @@ def signup_fun(request):
     if password == cpassword:
         if User.objects.filter(username=username).exists():
             # Redirect them to signup page
+            messages.error(request, "Username already taken" )
             return redirect("/home/signup")
         elif User.objects.filter(email=email).exists():
             # Redirect them to signup page
+            messages.error(request, "Account associated with email already exists" )
             return redirect("/home/signup")
         else:
             user = User.objects.create_user(first_name=firstname , last_name=lastname, email=email, password=password, username=username)
             user.save()
             auth.login(request , user)
             print("User created" , user)
+            messages.success(request, "Account successfully created Welcome " )
             return redirect("/home")
     else:
+        messages.error(request, "Some error occured please try again" )
         return redirect("/home/signup")
 
 
 def logout_fun(request):
     auth.logout(request)
+    messages.success(request, "Successfully logged out" )
     return redirect("/home")
 
 
-def videoDetails(request,id):
-    video = Video.objects.get(pk=id)
-    text = Text.objects.get(video_id = video.id)
-    f = open(str(text.text_data), 'r')
-    file_content = f.read()
-    f.close()
-    context = {
-        'video' : video,
-        'file_content' : file_content,
-    }
-    return render(request,'video.html',context)
 
 # 1. Machine Learning — Coursera
 
