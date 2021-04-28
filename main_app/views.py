@@ -86,7 +86,8 @@ def chatInterface(request ,id):
 def videoDetails(request,id):
     video = Video.objects.get(pk=id)
     text = Text.objects.get(video_id = video.id)
-    AllQuestions = Qna.get(video_id = video.id)
+    AllQuestions = Qna.objects.filter(video_id = video.id)
+    print(AllQuestions)
     f = open(str(text.text_data), 'r')
     file_content = f.read()
     f.close()

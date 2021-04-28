@@ -33,4 +33,4 @@ class Qna(models.Model):
     question = models.CharField(max_length=250)
     answer = models.CharField(max_length=250)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, blank=True, null = True)
