@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import Video,Text,Course,CourseText,Qna
 from django.http import HttpResponse
 from .albert import bye
+from .similar_questions import predict_similar_questions
 from .text_classifier import do_prediction
 from .speech_text import convert_text
 from django.conf import settings
@@ -179,6 +180,9 @@ def similarmatch(request , id):
     time.sleep(2)
     print(request.POST.get('question'))
     question = request.POST.get('question')
+    questions_data = ["what is machine learning?" , "what does the role of machine learning and data scientist looks like?" , "what are the requirements of data scientist job?" ]
+    data = predict_similar_questions(question , questions_data)
+    print(f"Got response from similar questions ===> {data}")
     return JsonResponse({
        'question' : "What is Machine Learning?",
        'answer' : "Something" 

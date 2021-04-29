@@ -12,6 +12,10 @@ from decouple import config
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+print(AWS_ACCESS_KEY_ID)
+print(AWS_SECRET_ACCESS_KEY)
+
+
 
 temp = Path(__file__).resolve().parent.parent
 temp = str(temp)
