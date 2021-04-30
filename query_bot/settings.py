@@ -100,26 +100,26 @@ WSGI_APPLICATION = 'query_bot.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'query_bot',
-#         'HOST': '127.0.0.1',
-#         'PORT':'3307',
-#         'USER' : 'root',
-#         'PASSWORD' : '',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'query_bot',
-        'USER' : 'postgres',
-        'PASSWORD' : '12345',
-        'HOST': 'localhost'
+        'HOST': '127.0.0.1',
+        'PORT':'3307',
+        'USER' : 'root',
+        'PASSWORD' : '',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'query_bot',
+#         'USER' : 'postgres',
+#         'PASSWORD' : '12345',
+#         'HOST': 'localhost'
+#     }
+# }
 
 
 # Password validation

@@ -40,4 +40,3 @@ def do_prediction(question):
 
     print("Something went wrong")
     return "Error"
-

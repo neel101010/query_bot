@@ -1,5 +1,3 @@
-import nlu
-pipe = nlu.load('embed_sentence.bert')
 import numpy as np
 import sklearn
 from sklearn.metrics.pairwise import cosine_similarity

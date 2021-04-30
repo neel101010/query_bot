@@ -49,12 +49,14 @@ $(".question-and-answer-form").submit(async function(e){
             let allcourses = $(".course-section");
             let courseID = allcourses[0].getAttribute("data");
             
+            let videoID = 0
+
             let data = new FormData();
             data.append("question" , inputdata);
-            let url = "/home/chat/" + courseID + "/classifytext";
+            let url = "/home/chat/classifytext/" +  courseID  + "/"+ videoID;
             const csrftoken = Cookies.get('csrftoken');
             // First API call 
-            
+            console.log(typeof(courseID))
             let textclassifierresponse = await fetch(url , { method : "POST",
                 body : data,
                 mode : "cors",
@@ -85,7 +87,7 @@ $(".question-and-answer-form").submit(async function(e){
 
             if(textclassifierdata.value === 0){
                 // Chatbot with general conversation
-                let gpt2url =  "/home/chat/" + courseID + "/gpt2chatbot";
+                let gpt2url =  "/home/chat/gpt2chatbot/" + courseID + "/" + videoID;
                 let gpt2response = await fetch(gpt2url , { method : "POST",
                     body : data,
                     mode : "cors",
@@ -126,7 +128,7 @@ $(".question-and-answer-form").submit(async function(e){
                 newelm.innerHTML = elmdata;
                 chatsection.appendChild(newelm);
                 // API reques for similar match
-                let similarquestionurl =  "/home/chat/" + courseID + "/similarmatch";
+                let similarquestionurl =  "/home/chat/similarmatch/" + courseID + "/" + videoID;
                 let similarquestionresponse = await fetch(similarquestionurl , { method : "POST",
                     body : data,
                     mode : "cors",
@@ -143,6 +145,7 @@ $(".question-and-answer-form").submit(async function(e){
                 chatbubble.remove();
                 // Setting chatbot response === 
                 let similarquestiondata = await similarquestionresponse.json();
+                console.log(similarquestiondata)
                 if(similarquestiondata.answer.length > 0 && similarquestiondata.answer !== "no"){
                     var newelm = document.createElement('div');
                     // Loading animation ==
@@ -189,7 +192,7 @@ $(".question-and-answer-form").submit(async function(e){
                     newelm.innerHTML = elmdata;
                     chatsection.appendChild(newelm);
 
-                    let QuestionAndAnswerURL =  "/home/chat/" + courseID + "/generateanswer";
+                    let QuestionAndAnswerURL =  "/home/chat/generateanswer/" + courseID  + "/"+ videoID;
                     let QuestionAndAnswerRes = await fetch(QuestionAndAnswerURL , { method : "POST",
                         body : data,
                         mode : "cors",
