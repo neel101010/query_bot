@@ -1,0 +1,21 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
+
+    {% for question in questions %}
+        <div class="each-question-and-answer-div">
+            {% if question.answer|length == 0 %}
+            <form method="POST" action="/home/questions/answer/{{course_id}}/{{video_id}}">
+            {% csrf_token %}
+                <h5> {{ question.question }}</h5>
+            <input type="text" name="question_id" hidden value="{{question.id}}" />
+            <label for="answer">Answer: </label>
+            <input type="text" name="answer">
+            <input type="submit">
+            </form>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+{% endblock %}

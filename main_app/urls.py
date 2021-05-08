@@ -15,4 +15,6 @@ urlpatterns = [
     path('login/check',views.login_fun),
     path('logout',views.logout_fun),
     path('video/<int:id>',views.videoDetails),
+    path('questions/<int:course_id>/<int:video_id>',views.question_display),
+    path('questions/answer/<int:course_id>/<int:video_id>',views.question_answer),
 ]

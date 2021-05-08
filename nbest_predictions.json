@@ -1,16 +1,16 @@
 {
     "0": [
         {
-            "text": "natural",
-            "probability": 0.9737819879348107,
-            "start_logit": 2.0193307399749756,
-            "end_logit": 2.0193307399749756
+            "text": "director",
+            "probability": 0.9999898879744918,
+            "start_logit": 6.021449089050293,
+            "end_logit": 6.021449089050293
         },
         {
             "text": "",
-            "probability": 0.026218012065189356,
-            "start_logit": 0.2119603455066681,
-            "end_logit": 0.2119603455066681
+            "probability": 1.0112025508129382e-05,
+            "start_logit": 0.270561546087265,
+            "end_logit": 0.270561546087265
         }
     ]
 }
