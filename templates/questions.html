@@ -1,0 +1,28 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
+   <div class="question-divs">
+        <h2 class="questionandansdiv">Unanswered Questions</h2>
+        {% for question in questions %}
+            <div class="each-question-and-answer-div-sec">
+                {% if question.answer|length == 0 %}
+                <form method="POST" action="/home/questions/answer/{{course_id}}/{{video_id}}">
+                    {% csrf_token %}
+                    <h5>Q) {{ question.question }}</h5>
+                    <input type="text" name="question_id" hidden value="{{question.id}}" />
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Answer</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="answer"></textarea>
+                    </div>
+                    <!-- <label for="answer">Answer: </label>
+                    <input type="text" name="answer"> -->
+                    <button type="submit" class="btn btn-primary d-block mt-3">Submit</button>
+                </form>
+                {% endif %}
+            </div>
+        {% endfor %}
+   </div>
+    
+
+{% endblock %}

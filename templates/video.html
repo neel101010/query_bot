@@ -1,0 +1,14 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
+
+<div class="container">
+    <video width="100%" height="100%" controls>
+        <source src='/media/{{ video.video_data }}' type="video/mp4">
+    </video>
+</div>
+<h2 class="container mt-3">Transcript</h2>
+<p class="container pb-4">{{ file_content }}</p>
+</div>
+{% endblock %}

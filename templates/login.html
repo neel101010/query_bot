@@ -1,0 +1,22 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
+<form class="login-form" method="POST" action="login/check">
+    {% csrf_token %}
+    <div class="login-div">
+        <h1>Login</h1>
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter Username" name="username" required>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+    </div>
+    <p>Does not have account? <a class="signuplink" href="/home/signup">Sign up</a></p>
+    <button type="submit" class="btn btn-primary d-block mt-3">Submit</button>
+</form>
+
+{% endblock %}

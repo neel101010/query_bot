@@ -1,0 +1,204 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block content %}
+
+    <div class="row our-main-heading-div">
+    <div class="col-6 main-heading-content">
+        {% if user.get_username %}
+            <h2>Welcome {{user.get_username }}</h2>
+            {% if user.is_staff %}
+            <p>You are instructor</p>
+            {% endif %}
+        {% endif %}
+
+            <h1>Query Bot</h1>
+            <p>
+                A Chatbot that can answer user queries by using course materials. It uses powerful models like ALBERT and BERT for natural language processing tasks.
+            </p>
+        </div>
+        <div class="col-6">
+            <div class="main-title-images">
+            <img src="{% static './images/chat.svg' %}">
+            </div>    
+        </div>
+    </div>
+
+    {% for course in courses %}
+    <div data="{{ course.id }}"  class="course-section">
+        <h3 class="course-name">{{course.course_name}}</h3>
+        <div class="row">
+            <div class="col-12">
+                <h5>Videos content</h5>
+                <div class="row our-videos-section-row">
+                    <div class="col-md-4">
+                        <form id="upload-form" enctype="multipart/form-data" method="POST" action="upload/{{course.id}}">
+                            {% csrf_token %}
+                            <div class="form-group our-upload-form">
+                                <label class="upload-container" for="exampleFormControlFile{{ course.id }}">
+                                  <div class="upload-container-content-div">
+                                    <i class="fas fa-upload"></i>
+                                    <p>Select File</p>
+                                  </div>  
+                                </label>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile{{ course.id }}" name="video">
+                            </div>
+                            <button class="btn btn-primary btn-sm btn-block" id="upload-button"><i class="fas fa-cloud-upload-alt"></i> <span> Upload </span></button>
+                        </form>
+                    </div>
+                    {% for video in videos %}
+                        {% if video.course_id == course.id %}
+                        <div class="col-md-4">
+                            <video width="100%" height="100%"  controls>
+                                <source src='/media/{{ video.video_data }}' type="video/mp4">
+                            </video>
+                            <br>
+                            <a href="video/{{ video.id }}">Video Transcript</a></button>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="transcript">
+                    <h3>Transcript</h3>
+                    <p>{{ file_content|get_item:course.id }}
+ <!-- <span data-toggle="modal" data-target=".bd-example-modal-lg">...Read More</span> -->
+                    </p>
+                </div>
+            </div>
+        
+        
+        </div> 
+        <div class="question-ans-section">
+            <h1 class="q-a-text">Q&A Forum</h1>
+            <h5 class="question-in-course-text">Questions in this course</h5>
+                {% for qna in AllQuestions %}
+                  {% if qna.course_id == course.id  %}
+                     <div class="each-question-and-answer-div">
+                        <h5>{{ forloop.counter }}) {{ qna.question }}</h5>
+                        <p>
+                            {% if qna.answer|length == 0 %}
+                                <span style="color : #545454 ; font-weight : 500; font-size : 17px;">Unanswered Question</span>
+                            {% else %}
+                                <span>{{ qna.answer }}</span>
+                            {% endif %}
+                        </p>    
+                      </div>
+                   {% endif  %}
+                {% endfor %}
+        </div>
+    
+    </div>
+    {% endfor %}
+
+
+     
+
+    <div class="chat-screen">
+        <div class="chat-header">
+            <div class="chat-header-title">
+                Query Bot
+            </div>
+        </div>
+        <div class="chat-mail">
+            <div class="row">
+                <div class="col-md-12 text-center mb-2">
+                    <p>Hi 👋! Please fill out the form below to start chatting with Querybot.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input id="chatbox-username" type="text" class="form-control" placeholder="Name">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-primary btn-rounded btn-block">Start Chat</button>
+                </div>
+            </div>
+        </div>
+        <div id="gretting-from-chatbot" class="chat-body hide">
+            <div class="chat-bubble you">Welcome to Query bot</div>
+        </div>
+        <div class="chat-input hide">
+            <form class="question-and-answer-form" method="post">
+                {% csrf_token %} 
+                <input type="text" id="questin-text-input" placeholder="Type a message...">
+                <div class="input-action-icon">
+                        <button class="btn btn-sm btn-primary"><i class="fas fa-location-arrow"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="chat-bot-icon">
+        <img src="{% static './images/we-are-here.svg' %}"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square animate"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x "><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </div>
+    
+
+    <!-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+            standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 
+            a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, 
+            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
+            Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. 
+            Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, 
+            and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+           The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+          </div>
+        </div>
+      </div> -->
+
+    
+ <!-- Modal -->
+ <!-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Transcript of Machine Learning — Coursera</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
+            standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make 
+            a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, 
+            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing 
+            Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. 
+            Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, 
+            and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus 
+            Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. 
+            The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+           The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de 
+           Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation 
+           by H. Rackham.
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <script>
+    let form = document.getElementById('form'); // selecting the form
+    
+    form.addEventListener('submit', function(event) { // 1
+        event.preventDefault()
+        
+        let data = new FormData(); // 2
+        
+        data.append("title", document.getElementById('title').value)  
+        data.append("note", document.getElementById('note').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}') // 3
+        
+        axios.post('create_note/', data) // 4
+         .then(res => alert("Form Submitted")) // 5
+         .catch(errors => console.log(errors)) // 6
+    
+    })
+    
+    </script> -->
+{% endblock %}

@@ -1,0 +1,40 @@
+.login-form{
+    margin: 18px 24%;
+    padding: 50px;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.login-div{
+    text-align: center;
+}
+
+.signuplink{
+    color : blue;
+    text-decoration: underline;
+}
+
+.login-form label{
+    font-weight : 600 !important;
+}
+
+
+.each-question-and-answer-div-sec{
+    margin: 10px 24% 30px;
+}
+
+.questionandansdiv{
+    text-align: center;
+    text-decoration: underline;
+    color: #4e4effde;
+}
+
+.question-divs{
+    padding-bottom : 20px !important;
+}
+
+#alert-button{
+    margin: 0px 7%;
+}
