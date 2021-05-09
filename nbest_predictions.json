@@ -1,0 +1,16 @@
+{
+    "0": [
+        {
+            "text": "brings together statistics and computer science",
+            "probability": 0.9999341791450017,
+            "start_logit": 5.262665748596191,
+            "end_logit": 5.021481513977051
+        },
+        {
+            "text": "",
+            "probability": 6.582085499826085e-05,
+            "start_logit": 0.4261825978755951,
+            "end_logit": 0.22945666313171387
+        }
+    ]
+}

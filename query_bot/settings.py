@@ -114,7 +114,7 @@ WSGI_APPLICATION = 'query_bot.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'query_bot',
+        'NAME': 'querybot',
         'USER' : 'postgres',
         'PASSWORD' : '12345',
         'HOST': 'localhost'
